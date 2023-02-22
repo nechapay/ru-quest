@@ -14,11 +14,13 @@ import {
   WebGLRenderer
 } from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, defineProps, onMounted, ref, watch } from 'vue'
 
 const { width, height } = useWindowSize()
 
-console.log(width, height)
+const props = defineProps({
+  someSize: Object
+})
 
 let controls
 
@@ -29,7 +31,7 @@ const scene = new Scene()
 const camera = new PerspectiveCamera(75, aspectRatio.value, 0.1, 1000)
 scene.add(camera)
 const light = new DirectionalLight('hsl(0, 100%, 100%)')
-const geometry = new BoxGeometry(1, 1, 1)
+const geometry = new BoxGeometry(0.05, 3, 3)
 const material = new MeshStandardMaterial({
   side: FrontSide,
   color: 'hsl(0, 100%, 50%)',
@@ -38,13 +40,21 @@ const material = new MeshStandardMaterial({
 scene.add(light)
 
 const cube = new Mesh(geometry, material)
+
+const floor = new Mesh(new BoxGeometry(3, 0.05, 3), material)
+const wall = new Mesh(new BoxGeometry(3, 3, 0.05), material)
 const axes = new AxesHelper(5)
 
 scene.add(cube)
+scene.add(floor)
+scene.add(wall)
 scene.add(axes)
 
-light.position.set(0, 0, 10)
-camera.position.z = 5
+light.position.set(0, 10, 10)
+camera.position.set(5, 0, 5)
+cube.position.set(0, 1.5, 1.5)
+floor.position.set(1.5, 0, 1.5)
+wall.position.set(1.5, 1.5, 0)
 
 scene.background = new Color('hsl(0, 100%, 100%)')
 
@@ -52,7 +62,6 @@ let renderer
 
 const animate = () => {
   renderer.render(scene, camera)
-  cube.rotation.y += 0.01
   controls.update()
   requestAnimationFrame(animate)
 }
@@ -70,6 +79,7 @@ onMounted(() => {
   updateRenderer()
   renderer.render(scene, camera)
   animate()
+  console.log(props.someSize)
 })
 
 function updateCamera() {
