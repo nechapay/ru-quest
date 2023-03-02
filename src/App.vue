@@ -1,5 +1,4 @@
 <script setup>
-import TheCanvas from './components/TheCanvas.vue'
 import Copyright from './components/Copyright.vue'
 import StartPage from './components/StartPage.vue'
 import EndPage from './components/EndPage.vue'
