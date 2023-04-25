@@ -9,9 +9,10 @@ function handleStartClick() {
   <div class="title-screen">
     <span>
       Мало кто знает, что фраза на смерть Пушкина <br /><i>«закатилось Солнце русской поэзии»</i> - это переложение слов
-      Жития на гибель Александра Невского: <br /><i>«Закатилось солнце земли русской»</i>. <br />
-      Литература и история всегда шли рядом. Чаще всего литература отражала страницы истории, но иногда литература и
-      вела историю за собой.
+      Жития <br />на гибель Александра Невского: <br /><i>«Закатилось солнце земли русской»</i>. <br />
+      Литература и история всегда шли рядом.<br />
+      Чаще всего литература отражала страницы истории,<br />
+      но иногда литература и вела историю за собой.
     </span>
     <button @click="handleStartClick" class="button-5">Начать</button>
   </div>
@@ -24,14 +25,18 @@ function handleStartClick() {
   height: 100%;
   align-items: center;
   justify-content: center;
-  background: grey;
+  background: rgb(135, 190, 98);
   flex-direction: column;
 }
 
 .title-screen span {
   width: 70%;
   text-align: center;
-  font-size: 200%;
+  font-size: 2rem;
+  background-color: white;
+  text-justify: distribute;
+  box-shadow: 5px 5px 5px grey;
+  border-radius: 1rem;
 }
 .button-5 {
   align-items: center;
@@ -60,6 +65,7 @@ function handleStartClick() {
   touch-action: manipulation;
   vertical-align: baseline;
   width: auto;
+  margin-top: 1rem;
 }
 
 .button-5:hover,

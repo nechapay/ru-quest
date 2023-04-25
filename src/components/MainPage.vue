@@ -1,6 +1,8 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import draggable from 'vuedraggable'
+import Table from '../components/Table.vue'
+import TableDialog from '../components/TableDialog.vue'
 
 const questions = [
   {
@@ -22,33 +24,34 @@ const questions = [
     verb: {
       title:
         'А теперь немного из программы Русского языка: найдите в этой строке букву, использующуюся 1 раз и характеризующуюся как согласный звук, мягкий парный, глухой парный.',
-      pre: '…и леса синие верхуш',
-      main: 'к',
-      post: 'и'
-    },
-    reward: 'К'
+      pre: '…',
+      main: 'и леса синие верхушки',
+      post: '.',
+      reward: 'К',
+      correct: 'к'
+    }
   }
 ]
 
 let dragging = ref(false)
-let enabled = ref(false)
+let enabled = ref(true)
 
 const inventory = ref([
   {
     id: 0,
-    value: 'К'
+    value: ''
   },
   {
     id: 1,
-    value: 'Б'
+    value: ''
   },
   {
     id: 2,
-    value: 'О'
+    value: ''
   },
   {
     id: 3,
-    value: 'Л'
+    value: ''
   }
 ])
 
@@ -76,12 +79,11 @@ function putReward() {
 </script>
 <template>
   <div class="main-page-container my-grid">
-    <div class="button--left base-flex">
-      <button @click="prevClick" :disabled="!isPrevVisible">назад</button>
-    </div>
-    <div class="question"></div>
-    <div class="button--right base-flex">
-      <button @click="nextClick" :disabled="!isNextVisible">вперёд</button>
+    <div class="question">
+      <div class="table-container"><Table /></div>
+      <div class="table-container"><Table /></div>
+      <div class="table-container"><Table /></div>
+      <div class="table-container"><Table /></div>
     </div>
     <div class="rewards base-flex">
       <draggable
@@ -113,28 +115,24 @@ function putReward() {
 
 .my-grid {
   display: grid;
-  grid-template-columns: 1fr 6fr 1fr;
+  grid-template-columns: 1fr;
   grid-template-rows: 3fr 1fr;
 }
-
-.button--left {
+.question {
   grid-column: 1;
   grid-row: 1;
+  display: flex;
+  flex-wrap: wrap;
 }
 
-.question {
-  grid-column: 2;
-  grid-row: 1;
+.table-container {
+  width: 40%;
+  margin-top: 2.5%;
+  margin-left: 7%;
 }
-
-.button--right {
-  grid-column: 3;
-  grid-row: 1;
-}
-
 .rewards {
   grid-row: 2;
-  grid-column: 1/4;
+  grid-column: 1;
 }
 
 .base-flex {
