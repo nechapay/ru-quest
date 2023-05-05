@@ -1,27 +1,148 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
 import draggable from 'vuedraggable'
-import Table from '../components/Table.vue'
-import TableDialog from '../components/TableDialog.vue'
+import Table from './Table.vue'
+import TableDialog from './TableDialog.vue'
+import Inventory from './Inventory.vue'
 
 const questions = [
   {
     type: 'list',
-    value: {
-      x: ref(''),
-      y: ref('')
-    },
     text: 'Итак, А.С.Пушкин. На смерть этого поэта другое «юное дарование» <b>(Х)</b> пишет стихотворение и за него ссылается на Кавказ.',
     list: [
       'Этот поэт <b>(Х)</b> на 25-летие важной исторической битвы пишет балладу <b>(Y)</b>.',
       'Этот поэт <b>(Х)</b> прожил очень мало. Он родился через 2 года после описываемого им в балладе <b>(Y)</b> сражения. Во время восстания декабристов ему было 11 лет.',
       'Даты его рождения и смерти легко запоминаются: последние две цифры зеркальны. Посчитайте, сколько же лет прожил поэт <b>(Х)</b> и отсчитайте в его балладе <b>(Y)</b> стих под таким номером.'
     ],
-    correct: {
-      x: 'лермонтов',
-      y: 'бородино'
-    },
     verb: {
+      text: [
+        {
+          id: 1,
+          line: '— Скажи-ка, дядя, ведь недаром',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 2,
+          line: 'Москва, спаленная пожаром,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 3,
+          line: 'Французу отдана?',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 4,
+          line: 'Ведь были ж схватки боевые,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 5,
+          line: 'Да, говорят, еще какие!',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 6,
+          line: 'Недаром помнит вся Россия',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 7,
+          line: 'Про день Бородина!',
+          correct: false,
+          blank: true
+        },
+        {
+          id: 8,
+          line: '— Да, были люди в наше время,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 9,
+          line: 'Не то, что нынешнее племя:',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 10,
+          line: 'Богатыри — не вы!',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 11,
+          line: 'Плохая им досталась доля:',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 12,
+          line: 'Немногие вернулись с поля…',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 13,
+          line: 'Не будь на то господня воля,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 14,
+          line: 'Не отдали б Москвы!',
+          correct: false,
+          blank: true
+        },
+        {
+          id: 15,
+          line: 'Мы долго молча отступали,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 16,
+          line: 'Досадно было, боя ждали,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 17,
+          line: 'Ворчали старики:',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 18,
+          line: '«Что ж мы? на зимние квартиры?',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 19,
+          line: 'Не смеют, что ли, командиры',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 20,
+          line: 'Чужие изорвать мундиры',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 21,
+          line: 'О русские штыки?»',
+          correct: false,
+          blank: true
+        }
+      ],
       title:
         'А теперь немного из программы Русского языка: найдите в этой строке букву, использующуюся 1 раз и характеризующуюся как согласный звук, мягкий парный, глухой парный.',
       pre: '…',
@@ -32,9 +153,6 @@ const questions = [
     }
   }
 ]
-
-let dragging = ref(false)
-let enabled = ref(true)
 
 const inventory = ref([
   {
@@ -79,28 +197,18 @@ function putReward() {
 </script>
 <template>
   <div class="main-page-container my-grid">
+    <div class="button--left base-flex">
+      <button @click="prevClick" :disabled="!isPrevVisible">назад</button>
+    </div>
     <div class="question">
-      <div class="table-container"><Table /></div>
-      <div class="table-container"><Table /></div>
-      <div class="table-container"><Table /></div>
-      <div class="table-container"><Table /></div>
+      Стол {{ index + 1 }}
+      <div class="table-container"><Table :question="questions[index]" /></div>
+    </div>
+    <div class="button--right base-flex">
+      <button @click="nextClick" :disabled="!isNextVisible">вперёд</button>
     </div>
     <div class="rewards base-flex">
-      <draggable
-        :list="inventory"
-        :disabled="!enabled"
-        item-key="id"
-        class="list-group"
-        ghost-class="ghost"
-        @start="dragging = true"
-        @end="dragging = false"
-      >
-        <template #item="{ element }">
-          <div class="list-group-item letter base-flex" :class="{ 'not-draggable': !enabled }">
-            {{ element.value }}
-          </div>
-        </template>
-      </draggable>
+      <Inventory :inventory="inventory" />
     </div>
   </div>
 </template>
@@ -115,24 +223,37 @@ function putReward() {
 
 .my-grid {
   display: grid;
-  grid-template-columns: 1fr;
+  grid-template-columns: 1fr 6fr 1fr;
   grid-template-rows: 3fr 1fr;
 }
-.question {
+
+.button--left {
   grid-column: 1;
+  grid-row: 1;
+}
+
+.button--right {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.question {
+  grid-column: 2;
   grid-row: 1;
   display: flex;
   flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
 }
 
 .table-container {
-  width: 40%;
-  margin-top: 2.5%;
-  margin-left: 7%;
+  width: 100%;
+  height: 90%;
+  margin: 4% 4% 0 4%;
 }
 .rewards {
   grid-row: 2;
-  grid-column: 1;
+  grid-column: 1/4;
 }
 
 .base-flex {

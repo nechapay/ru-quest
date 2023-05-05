@@ -1,5 +1,5 @@
 <script setup>
-import { computed, defineEmits, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
 const emits = defineEmits(['started'])
 function handleStartClick() {
   emits('started')

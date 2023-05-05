@@ -11,11 +11,6 @@
   align-items: center;
   justify-content: center;
   border: 3px solid black;
-  cursor: pointer;
-}
-
-.table:hover {
-  border-color: #afa;
 }
 
 .book {
@@ -23,6 +18,9 @@
   height: 45%;
   border: 1px solid black;
   margin-right: 25%;
+  min-height: 240px;
+  min-width: 172px;
+  cursor: pointer;
 }
 
 .tablet {
@@ -30,6 +28,9 @@
   background-repeat: no-repeat;
   background-size: cover;
   width: 15%;
-  height: 47%;
+  /* height: 47%; */
+  min-height: 240px;
+  min-width: 172px;
+  cursor: pointer;
 }
 </style>
