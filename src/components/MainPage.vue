@@ -141,6 +141,474 @@ const questions = [
           line: 'О русские штыки?»',
           correct: false,
           blank: true
+        },
+        {
+          id: 22,
+          line: 'И вот нашли большое поле:',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 23,
+          line: 'Есть разгуляться где на воле!',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 24,
+          line: 'Построили редут.',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 25,
+          line: 'У наших ушки на макушке!',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 26,
+          line: 'Чуть утро осветило пушки',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 27,
+          line: 'И леса синие верхушки —',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 28,
+          line: 'Французы тут как тут.',
+          correct: false,
+          blank: true
+        },
+        {
+          id: 29,
+          line: 'Забил заряд я в пушку туго',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 30,
+          line: 'И думал: угощу я друга!',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 31,
+          line: 'Постой-ка, брат мусью!',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 32,
+          line: 'Что тут хитрить, пожалуй к бою;',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 33,
+          line: 'Уж мы пойдем ломить стеною,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 34,
+          line: 'Уж постоим мы головою',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 35,
+          line: 'За родину свою!',
+          correct: false,
+          blank: true
+        },
+        {
+          id: 36,
+          line: 'Два дня мы были в перестрелке.',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 37,
+          line: 'Что толку в этакой безделке?',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 38,
+          line: 'Мы ждали третий день.',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 39,
+          line: 'Повсюду стали слышны речи:',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 40,
+          line: '«Пора добраться до картечи!»',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 41,
+          line: 'И вот на поле грозной сечи',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 42,
+          line: 'Ночная пала тень.',
+          correct: false,
+          blank: true
+        },
+        {
+          id: 43,
+          line: 'Прилег вздремнуть я у лафета,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 44,
+          line: 'И слышно было до рассвета,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 45,
+          line: 'Как ликовал француз.',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 46,
+          line: 'Но тих был наш бивак открытый:',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 47,
+          line: 'Кто кивер чистил весь избитый,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 48,
+          line: 'Кто штык точил, ворча сердито,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 49,
+          line: 'Кусая длинный ус.',
+          correct: false,
+          blank: true
+        },
+        {
+          id: 50,
+          line: 'И только небо засветилось,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 51,
+          line: 'Все шумно вдруг зашевелилось,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 52,
+          line: 'Сверкнул за строем строй.',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 53,
+          line: 'Полковник наш рожден был хватом:',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 54,
+          line: 'Слуга царю, отец солдатам…',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 55,
+          line: 'Да, жаль его: сражен булатом,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 56,
+          line: 'Он спит в земле сырой.',
+          correct: false,
+          blank: true
+        },
+        {
+          id: 57,
+          line: 'И молвил он, сверкнув очами:',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 58,
+          line: '«Ребята! не Москва ль за нами?',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 59,
+          line: 'Умремте ж под Москвой,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 60,
+          line: 'Как наши братья умирали!»',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 61,
+          line: 'И умереть мы обещали,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 62,
+          line: 'И клятву верности сдержали',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 63,
+          line: 'Мы в Бородинский бой.',
+          correct: false,
+          blank: true
+        },
+        {
+          id: 64,
+          line: 'Ну ж был денек! Сквозь дым летучий',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 65,
+          line: 'Французы двинулись, как тучи,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 66,
+          line: 'И всё на наш редут.',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 67,
+          line: 'Уланы с пестрыми значками,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 68,
+          line: 'Драгуны с конскими хвостами,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 69,
+          line: 'Все промелькнули перед нами,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 70,
+          line: 'Все побывали тут.',
+          correct: false,
+          blank: true
+        },
+        {
+          id: 71,
+          line: 'Вам не видать таких сражений!..',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 72,
+          line: 'Носились знамена, как тени,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 73,
+          line: 'В дыму огонь блестел,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 74,
+          line: 'Звучал булат, картечь визжала,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 75,
+          line: 'Рука бойцов колоть устала,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 76,
+          line: 'И ядрам пролетать мешала',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 77,
+          line: 'Гора кровавых тел.',
+          correct: false,
+          blank: true
+        },
+        {
+          id: 78,
+          line: 'Изведал враг в тот день немало,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 79,
+          line: 'Что значит русский бой удалый,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 80,
+          line: 'Наш рукопашный бой!..',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 81,
+          line: 'Земля тряслась — как наши груди,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 82,
+          line: 'Смешались в кучу кони, люди,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 83,
+          line: 'И залпы тысячи орудий',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 84,
+          line: 'Слились в протяжный вой…',
+          correct: false,
+          blank: true
+        },
+        {
+          id: 85,
+          line: 'Вот смерклось. Были все готовы',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 86,
+          line: 'Заутра бой затеять новый',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 87,
+          line: 'И до конца стоять…',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 88,
+          line: 'Вот затрещали барабаны —',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 89,
+          line: 'И отступили бусурманы.',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 90,
+          line: 'Тогда считать мы стали раны,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 91,
+          line: 'Товарищей считать.',
+          correct: false,
+          blank: true
+        },
+        {
+          id: 92,
+          line: 'Да, были люди в наше время,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 93,
+          line: 'Могучее, лихое племя:',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 94,
+          line: 'Богатыри — не вы.',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 95,
+          line: 'Плохая им досталась доля:',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 96,
+          line: 'Немногие вернулись с поля.',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 97,
+          line: 'Когда б на то не божья воля,',
+          correct: false,
+          blank: false
+        },
+        {
+          id: 98,
+          line: 'Не отдали б Москвы!',
+          correct: false,
+          blank: true
+        },
+        {
+          id: 98,
+          line: '1837 г.',
+          correct: false,
+          blank: false
         }
       ],
       title:
