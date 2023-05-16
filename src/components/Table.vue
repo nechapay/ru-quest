@@ -1,9 +1,28 @@
-<script setup></script>
+<script setup>
+import { ref } from 'vue'
+import TabletDialog from './TabletDialog.vue'
+import ScrollDialog from './ScrollDialog.vue'
+
+const props = defineProps(['question'])
+
+let tabletDialogVisible = ref(false)
+let scrollDialogVisible = ref(false)
+
+function handleScrollClose() {
+  scrollDialogVisible.value = false
+}
+</script>
 <template>
   <div class="table fill">
-    <div class="book"></div>
+    <div class="book" @click="scrollDialogVisible = true"></div>
     <div class="tablet"></div>
   </div>
+  <Transition name="bounce">
+    <ScrollDialog v-if="scrollDialogVisible" @close="handleScrollClose" :scroll="question?.scroll"/>
+  </Transition>
+  <Transition name="bounce">
+    <TabletDialog v-if="tabletDialogVisible" :tablet="question?.tablet"/>
+  </Transition>
 </template>
 <style scoped>
 .table {

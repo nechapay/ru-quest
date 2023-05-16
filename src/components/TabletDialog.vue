@@ -1,12 +1,14 @@
 <script setup>
-import Table from './Table.vue'
+const emits = defineEmits(['close'])
+function handleCloseClick() {
+  emits('close')
+}
 </script>
 
 <template>
   <div class="dialog-wrapper fill base-flex">
-    <div class="dialog-body">
-      <Table />
-    </div>
+    <div class="dialog-body"></div>
+    <button @click="handleCloseClick">Close</button>
   </div>
 </template>
 
