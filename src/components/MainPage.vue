@@ -1,6 +1,5 @@
 <script setup>
 import { computed, onMounted, ref } from 'vue'
-import draggable from 'vuedraggable'
 import Table from './Table.vue'
 import Inventory from './Inventory.vue'
 
@@ -16,6 +15,105 @@ const questions = [
       ]
     },
     tablet: {
+      authors: [
+        {
+          id: 1,
+          name: 'Ахматова',
+          img: 'Akhmatova.jpg',
+          correct: false,
+          works: []
+        },
+        {
+          id: 2,
+          name: 'Блок',
+          img: 'Blok.jpg',
+          correct: false,
+          works: []
+        },
+        {
+          id: 3,
+          name: 'Есенин',
+          img: 'Esenin.jpg',
+          correct: false,
+          works: []
+        },
+        {
+          id: 4,
+          name: 'Лермонтов',
+          img: 'Lermontov.jpg',
+          correct: true,
+          works: [
+            {
+              id: 1,
+              name: 'Морская царевна',
+              correct: false
+            },
+            {
+              id: 2,
+              name: 'Воздушный корабль',
+              correct: false
+            },
+            {
+              id: 3,
+              name: 'Пир Асмодея',
+              correct: false
+            },
+            {
+              id: 4,
+              name: 'Мрак. Тьма',
+              correct: false
+            },
+            {
+              id: 5,
+              name: 'Бородино',
+              correct: true
+            },
+            {
+              id: 6,
+              name: 'Джюлио',
+              correct: false
+            },
+            {
+              id: 7,
+              name: 'Прощание Наполеона',
+              correct: false
+            },
+            {
+              id: 8,
+              name: 'Три ведьмы',
+              correct: false
+            }
+          ]
+        },
+        {
+          id: 5,
+          name: 'Маяковский',
+          img: 'Mayakovsky.jpg',
+          correct: false,
+          works: []
+        },
+        {
+          id: 6,
+          name: 'Некрасов',
+          img: 'Nekrasov.jpg',
+          correct: false,
+          works: []
+        },
+        {
+          id: 7,
+          name: 'Пушкин',
+          img: 'Pushkin.jpg',
+          correct: false,
+          works: []
+        },
+        {
+          id: 8,
+          name: 'Твардовский',
+          img: 'Tvardovsky.jpg',
+          correct: false,
+          works: []
+        }
+      ],
       verb: {
         text: [
           {

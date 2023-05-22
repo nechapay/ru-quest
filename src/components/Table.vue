@@ -5,23 +5,29 @@ import ScrollDialog from './ScrollDialog.vue'
 
 const props = defineProps(['question'])
 
+let faded = ref(false)
+
 let tabletDialogVisible = ref(false)
 let scrollDialogVisible = ref(false)
 
-function handleScrollClose() {
-  scrollDialogVisible.value = false
+function showDialog(dialog, val) {
+  if (!dialog) return
+  if (dialog === 'tablet') tabletDialogVisible.value = val
+  if (dialog === 'scroll') scrollDialogVisible.value = val
+  faded.value = val
 }
 </script>
 <template>
   <div class="table fill">
-    <div class="book" @click="scrollDialogVisible = true"></div>
-    <div class="tablet"></div>
+    <div class="book" @click="showDialog('scroll', true)"></div>
+    <div class="tablet" @click="showDialog('tablet', true)"></div>
   </div>
+  <Transition name="fade"><div class="transparent-fader fill" v-if="faded"></div></Transition>
   <Transition name="bounce">
-    <ScrollDialog v-if="scrollDialogVisible" @close="handleScrollClose" :scroll="question?.scroll"/>
+    <ScrollDialog v-if="scrollDialogVisible" @close="showDialog('scroll', false)" :scroll="question?.scroll" />
   </Transition>
   <Transition name="bounce">
-    <TabletDialog v-if="tabletDialogVisible" :tablet="question?.tablet"/>
+    <TabletDialog v-if="tabletDialogVisible" @close="showDialog('tablet', false)" :tablet="question?.tablet" />
   </Transition>
 </template>
 <style scoped>
@@ -51,5 +57,12 @@ function handleScrollClose() {
   min-height: 240px;
   min-width: 172px;
   cursor: pointer;
+}
+
+.transparent-fader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(128, 128, 128, 0.425);
 }
 </style>

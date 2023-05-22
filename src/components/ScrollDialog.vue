@@ -25,7 +25,7 @@ function handleCloseClick() {
   position: fixed;
   top: 0;
   left: 0;
-  background: rgba(128, 128, 128, 0.425);
+  /* background: rgba(128, 128, 128, 0.425); */
 }
 
 .dialog-body {
