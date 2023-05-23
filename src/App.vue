@@ -14,14 +14,10 @@ function handleStarted() {
 </script>
 
 <template>
-  <Transition name="fade">
+  <Transition name="fade" mode="out-in">
     <start-page v-if="!started && !ended" @started="handleStarted" />
-  </Transition>
-  <Transition name="fade">
-    <main-page v-if="started && !ended" />
-  </Transition>
-  <Transition name="fade">
-    <end-page v-if="ended" />
+    <main-page v-else-if="started && !ended" />
+    <end-page v-else-if="ended" />
   </Transition>
   <Copyright />
 </template>

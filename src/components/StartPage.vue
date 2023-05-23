@@ -1,5 +1,4 @@
 <script setup>
-import { computed, onMounted, ref, watch } from 'vue'
 const emits = defineEmits(['started'])
 function handleStartClick() {
   emits('started')
@@ -32,7 +31,7 @@ function handleStartClick() {
 .title-screen span {
   width: 70%;
   text-align: center;
-  font-size: 2rem;
+  font-size: 150%;
   background-color: white;
   text-justify: distribute;
   box-shadow: 5px 5px 5px grey;

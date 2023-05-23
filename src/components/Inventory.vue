@@ -17,7 +17,7 @@ let enabled = ref(true)
   >
     <template #item="{ element }">
       <div class="list-group-item letter base-flex" :class="{ 'not-draggable': !enabled }">
-        {{ element.value }}
+        {{ element.name }}
       </div>
     </template>
   </draggable>

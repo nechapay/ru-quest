@@ -4,7 +4,7 @@ import TabletDialog from './TabletDialog.vue'
 import ScrollDialog from './ScrollDialog.vue'
 
 const props = defineProps(['question'])
-
+const emits = defineEmits(['finished'])
 let faded = ref(false)
 
 let tabletDialogVisible = ref(false)
@@ -27,7 +27,12 @@ function showDialog(dialog, val) {
     <ScrollDialog v-if="scrollDialogVisible" @close="showDialog('scroll', false)" :scroll="question?.scroll" />
   </Transition>
   <Transition name="bounce">
-    <TabletDialog v-if="tabletDialogVisible" @close="showDialog('tablet', false)" :tablet="question?.tablet" />
+    <TabletDialog
+      v-if="tabletDialogVisible"
+      @close="showDialog('tablet', false)"
+      :tablet="question?.tablet"
+      @finished="(e) => emits('finished')"
+    />
   </Transition>
 </template>
 <style scoped>
