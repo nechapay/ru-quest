@@ -31,5 +31,9 @@ let enabled = ref(true)
   margin: 5px;
   background: linear-gradient(to bottom, #4096ee 0%, #4096ee 100%);
   user-select: none;
+  font-weight: bolder;
+  color: white;
+  font-size: 3rem;
+  text-shadow: 3px 3px 5px#000000, -1px -1px 5px #000000, 1px -1px 5px #00000000, -1px 1px 5px #000, 1px 1px 5px #000;
 }
 </style>

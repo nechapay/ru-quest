@@ -196,6 +196,7 @@ function handleLetterClick(evt, val) {
 
 .author-wrapper.incorrect {
   border: 2px solid rgb(247, 89, 89);
+  animation: tilt-shaking 0.15s;
 }
 
 .author-wrapper img {
@@ -222,6 +223,7 @@ function handleLetterClick(evt, val) {
 
 .work-wrapper.incorrect {
   border: 2px solid rgb(247, 89, 89);
+  animation: tilt-shaking 0.15s;
 }
 .no-wrap {
   flex-wrap: nowrap;
@@ -247,6 +249,7 @@ function handleLetterClick(evt, val) {
 
 .line-text.incorrect {
   color: rgb(247, 89, 89);
+  animation: tilt-shaking 0.15s;
 }
 
 .line-wrapper:hover .line-index {
@@ -271,6 +274,7 @@ function handleLetterClick(evt, val) {
   color: rgb(247, 89, 89);
   cursor: auto;
   font-weight: bolder;
+  animation: tilt-shaking 0.15s;
 }
 
 .verb-letter:hover {
