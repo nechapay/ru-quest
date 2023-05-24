@@ -65,12 +65,21 @@ function handleDigitClick(evt) {
   display: grid;
   width: 100%;
   height: 50%;
+  gap: 1px;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr 1fr 1fr 1fr;
 }
 
 .digit-button {
-  font-size: 1rem;
+  font-size: 2rem;
+  background: white;
+  border: 1px solid green;
+  transition-duration: 0.3s;
+}
+
+.digit-button:hover {
+  background: green;
+  color: white;
 }
 
 .auth-output {

@@ -102,7 +102,7 @@ function handleTabletClick(evt) {
           </div>
         </div>
         <div class="tablet-inner-wrapper flex-column no-wrap" v-else-if="page === 'poem'">
-          {{ author }}. {{ work }}
+          <span class="base-flex fill">{{ author }}. {{ work }}</span>
           <hr />
           <div class="line-wrapper" v-for="item in tablet.poem">
             <span class="line-index">{{ item.id }}</span>
@@ -124,10 +124,11 @@ function handleTabletClick(evt) {
             >
             <span class="verb-letter blank">{{ tablet?.verb.post }}</span>
           </div>
-
-          <Transition name="fade">
-            <div v-if="finished">message</div>
-          </Transition>
+          <div class="message-container base-flex">
+            <Transition name="fade">
+              <span v-if="finished">message</span>
+            </Transition>
+          </div>
         </div>
       </Transition>
       <!-- <button class="tablet-close-button" @click="handleCloseClick" title="Закрыть"></button> -->
@@ -237,6 +238,7 @@ function handleTabletClick(evt) {
   text-align: center;
   padding: 1%;
   transition-duration: 0.5s;
+  word-break: break-all;
 }
 
 .work-wrapper.correct {
@@ -262,7 +264,11 @@ function handleTabletClick(evt) {
   cursor: pointer;
   user-select: none;
   margin: 4px 0;
-  width: 80%;
+  width: 100%;
+}
+
+.line-text {
+  font-size: 100%;
 }
 
 .line-text.correct {
@@ -313,5 +319,10 @@ function handleTabletClick(evt) {
 
 .verb-wrapper {
   width: 100%;
+}
+
+.message-container {
+  width: 100%;
+  height: 30%;
 }
 </style>

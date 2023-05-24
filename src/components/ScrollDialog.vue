@@ -30,12 +30,12 @@ function handleCloseClick() {
 
 .dialog-body {
   background: white;
-  width: 38%;
   height: 95%;
   border: 1px solid black;
   padding: 2%;
-  font-size: 1.2em;
+  font-size: 100%;
   text-align: justify;
+  aspect-ratio: 5/7;
 }
 
 li {
