@@ -1,6 +1,8 @@
 <script setup>
 import { onMounted, ref } from 'vue'
 import _ from 'lodash'
+import TabletAuth from './TabletAuth.vue'
+
 const emits = defineEmits(['close', 'finished'])
 const props = defineProps(['tablet'])
 function handleCloseClick() {
@@ -15,6 +17,7 @@ let flowIndex = ref(0)
 
 onMounted(() => {
   page.value = props.tablet.flow[flowIndex.value]
+  finished.value = false
 })
 
 function nextStage() {
@@ -56,13 +59,28 @@ function handleLetterClick(evt, val) {
     emits('finished')
   } else evt.target.classList.add('incorrect')
 }
+
+function handleTabletClick(evt) {
+  let el = document.querySelector('.big-tablet').getBoundingClientRect()
+  if (
+    evt.offsetX >= el.width * 0.433 &&
+    evt.offsetX <= el.width * 0.508 &&
+    evt.offsetY >= el.height * 0.879 &&
+    evt.offsetY <= el.height * 0.923
+  ) {
+    emits('close')
+  }
+}
 </script>
 
 <template>
   <div class="dialog-wrapper fill base-flex" @click.self="handleCloseClick">
-    <div class="dialog-body big-tablet base-flex flex-column">
+    <div class="dialog-body tablet big-tablet base-flex flex-column" @click.self="handleTabletClick">
       <Transition name="fade" mode="out-in">
-        <div class="tablet-inner-wrapper" v-if="page === 'authors'">
+        <div class="tablet-inner-wrapper" v-if="page === 'password'">
+          <TabletAuth :password="tablet.password" @passed="nextStage" />
+        </div>
+        <div class="tablet-inner-wrapper" v-else-if="page === 'authors'">
           <div
             class="author-wrapper"
             v-for="item in _.shuffle(tablet.authors)"
@@ -94,22 +112,25 @@ function handleLetterClick(evt, val) {
           </div>
         </div>
         <div class="tablet-inner-wrapper justify-center" v-else-if="page === 'verb'">
-          {{ tablet?.verb.title }}
-          <span class="verb-letter blank">{{ tablet?.verb.pre }}</span>
-          <span
-            class="verb-letter"
-            :class="{ blank: item === ' ' }"
-            @click="handleLetterClick($event, item)"
-            v-for="item in tablet.verb.main.split('')"
-            >{{ item }}</span
-          >
-          <span class="verb-letter blank">{{ tablet?.verb.post }}</span>
+          <span>{{ tablet?.verb.title }}</span>
+          <div class="verb-wrapper base-flex">
+            <span class="verb-letter blank">{{ tablet?.verb.pre }}</span>
+            <span
+              class="verb-letter"
+              :class="{ blank: item === ' ' }"
+              @click="handleLetterClick($event, item)"
+              v-for="item in tablet.verb.main.split('')"
+              >{{ item }}</span
+            >
+            <span class="verb-letter blank">{{ tablet?.verb.post }}</span>
+          </div>
+
           <Transition name="fade">
             <div v-if="finished">message</div>
           </Transition>
         </div>
       </Transition>
-      <button class="tablet-close-button" @click="handleCloseClick" title="Закрыть"></button>
+      <!-- <button class="tablet-close-button" @click="handleCloseClick" title="Закрыть"></button> -->
     </div>
   </div>
 </template>
@@ -124,20 +145,22 @@ function handleLetterClick(evt, val) {
 }
 
 .dialog-body {
-  width: 38%;
   height: 95%;
-  padding: 2%;
   font-size: 1.2em;
   text-align: justify;
 }
 
 .big-tablet {
-  background-image: url('/img/tablet.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 37.1%;
-  min-height: 240px;
-  min-width: 172px;
+  background: white;
+  border: 2vh rgb(7, 80, 35) solid;
+  border-top-width: 6vh;
+  border-bottom-width: 7vh;
+  border-radius: 2%;
+}
+
+.big-tablet:after {
+  height: 6%;
+  top: 104%;
 }
 
 .tablet-inner-wrapper {
@@ -146,9 +169,8 @@ function handleLetterClick(evt, val) {
   overflow-y: scroll;
   overflow-x: hidden;
   /* border: 1px solid black; */
-  width: 98%;
-  height: 89%;
-  margin-top: 8%;
+  width: 100%;
+  height: 100%;
   padding: 2%;
 }
 
@@ -287,5 +309,9 @@ function handleLetterClick(evt, val) {
 
 .verb-letter.blank:hover {
   font-weight: 100;
+}
+
+.verb-wrapper {
+  width: 100%;
 }
 </style>

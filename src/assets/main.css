@@ -37,8 +37,6 @@
   justify-content: center;
 }
 
-
-
 .fade-enter-active,
 .fade-leave-active {
   transition: opacity 0.5s ease;
@@ -157,4 +155,36 @@
   100% {
     transform: rotate(0deg);
   }
+}
+
+.tablet {
+  position: relative;
+  height: 30vh;
+  border: 1vh rgb(7, 80, 35) solid;
+  border-top-width: 3vh;
+  border-bottom-width: 4vh;
+  border-radius: 4%;
+  aspect-ratio: 5/7;
+  cursor: pointer;
+  background: #333;
+}
+
+.tablet:after {
+  content: '';
+  display: block;
+  height: 12%;
+  position: absolute;
+  left: 50%;
+  top: 109%;
+  transform: translate(-50%, -50%);
+  background: #333;
+  border-radius: 50%;
+  border: 0.5vh solid rgb(77 157 28);
+  aspect-ratio: 1/1;
+}
+
+.tablet .screen {
+  width: 360px;
+  height: 400px;
+  background: white;
 }
