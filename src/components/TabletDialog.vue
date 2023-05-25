@@ -73,7 +73,6 @@ function handleTabletClick(evt) {
 }
 
 function handleNumberClick(evt) {
-  console.log(evt.target.value)
   if (evt.target.value == props.tablet.numbers.correct) nextStage()
 }
 
