@@ -1,12 +1,10 @@
+<script setup></script>
+
 <template>
   <div class="final-page fill">
     <div class="final-page__header">Поздравляем!<br />Вы спасены!</div>
   </div>
 </template>
-
-<script>
-export default {}
-</script>
 
 <style scoped>
 .final-page {
