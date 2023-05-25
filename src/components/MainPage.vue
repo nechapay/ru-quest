@@ -3,7 +3,7 @@ import { computed, ref, watch } from 'vue'
 import Table from './Table.vue'
 import Inventory from './Inventory.vue'
 
-const emits = defineEmits('ended')
+const emits = defineEmits(['ended'])
 
 const questions = [
   {
