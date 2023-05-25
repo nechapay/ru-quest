@@ -1,11 +1,13 @@
 <script setup>
 import { ref } from 'vue'
+
 const props = defineProps(['password'])
 let output = ref('')
 let showErrorMessage = ref(false)
+
 let emits = defineEmits(['passed'])
+
 function handleDigitClick(evt) {
-  console.log(evt)
   if (output.value.length < 4) {
     output.value += evt.target.value
   }
@@ -13,14 +15,12 @@ function handleDigitClick(evt) {
     showErrorMessage.value = false
     output.value = '' + evt.target.value
   }
-  if (output.value.length === 4) {
-    if (output.value === props.password.correct) {
-      setTimeout(() => {
-        emits('passed')
-      }, 500)
-    } else {
-      showErrorMessage.value = true
-    }
+  if (output.value === props.password.correct) {
+    setTimeout(() => {
+      emits('passed')
+    }, 500)
+  } else {
+    if (output.value.length === 4) showErrorMessage.value = true
   }
 }
 </script>

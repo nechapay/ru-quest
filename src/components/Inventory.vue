@@ -1,9 +1,8 @@
 <script setup>
 import { ref } from 'vue'
 import draggable from 'vuedraggable'
-const props = defineProps(['inventory'])
+const props = defineProps(['inventory', 'enabled'])
 let dragging = ref(false)
-let enabled = ref(true)
 </script>
 <template>
   <draggable

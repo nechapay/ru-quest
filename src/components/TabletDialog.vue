@@ -3,7 +3,7 @@ import { onMounted, ref } from 'vue'
 import _ from 'lodash'
 import TabletAuth from './TabletAuth.vue'
 
-const emits = defineEmits(['close', 'finished'])
+const emits = defineEmits(['close', 'finished', 'completed'])
 const props = defineProps(['tablet'])
 function handleCloseClick() {
   emits('close')
@@ -53,7 +53,7 @@ function handleLineClick(evt, val) {
 
 function handleLetterClick(evt, val) {
   if (val === ' ') return
-  if (val === props.tablet.verb.correct) {
+  if (val.toLowerCase() === props.tablet.verb.correct.toLowerCase()) {
     evt.target.classList.add('correct')
     finished.value = true
     emits('finished')
@@ -70,6 +70,22 @@ function handleTabletClick(evt) {
   ) {
     emits('close')
   }
+}
+
+function handleNumberClick(evt) {
+  console.log(evt.target.value)
+  if (evt.target.value == props.tablet.numbers.correct) nextStage()
+}
+
+function handleWordClick(evt, val) {
+  if (val === props.tablet.word.correct) {
+    evt.target.classList.add('correct')
+    nextStage()
+  } else evt.target.classList.add('incorrect')
+}
+
+function handleInfoClick() {
+  emits('completed')
 }
 </script>
 
@@ -111,6 +127,20 @@ function handleTabletClick(evt) {
             <br />
           </div>
         </div>
+        <div class="tablet-inner-wrapper flex-column no-wrap" v-else-if="page === 'numbers'">
+          <span class="base-flex fill">{{ tablet.numbers.text }}</span>
+          <hr />
+          <div class="base-flex fill flex-wrap justify-start">
+            <button
+              class="tablet-number"
+              v-for="number in tablet.numbers.count"
+              :value="number"
+              @click="handleNumberClick"
+            >
+              {{ number }}
+            </button>
+          </div>
+        </div>
         <div class="tablet-inner-wrapper justify-center" v-else-if="page === 'verb'">
           <span>{{ tablet?.verb.title }}</span>
           <div class="verb-wrapper base-flex">
@@ -128,6 +158,24 @@ function handleTabletClick(evt) {
             <Transition name="fade">
               <span v-if="finished">message</span>
             </Transition>
+          </div>
+        </div>
+        <div class="tablet-inner-wrapper flex-column base-flex" v-else-if="page === 'info'">
+          <span>{{ tablet?.info.text }}</span>
+
+          <button class=".tablet-number" @click="handleInfoClick">Приступить</button>
+        </div>
+        <div class="tablet-inner-wrapper flex-column base-flex" v-else-if="page === 'final'">
+          <span>{{ tablet?.final.text }}</span>
+
+          <button class="tablet-number" @click="handleInfoClick">Спастись</button>
+        </div>
+        <div class="tablet-inner-wrapper flex-column no-wrap" v-else-if="page === 'word'">
+          <div class="line-wrapper" v-for="item in tablet.word.text">
+            <span class="tablet-word" v-for="word in item.split(' ')" @click="handleWordClick($event, word)">{{
+              word
+            }}</span>
+            <br />
           </div>
         </div>
       </Transition>
@@ -319,10 +367,40 @@ function handleTabletClick(evt) {
 
 .verb-wrapper {
   width: 100%;
+  flex-wrap: wrap;
 }
 
 .message-container {
   width: 100%;
   height: 30%;
+}
+
+.tablet-number {
+  font-size: 2rem;
+  background: white;
+  border: 1px solid green;
+  transition-duration: 0.3s;
+  padding: 2% 4%;
+  min-width: 18%;
+  margin: 0.5%;
+  cursor: pointer;
+}
+
+.tablet-number:hover {
+  background: green;
+  color: white;
+}
+
+.tablet-word {
+  margin-right: 8px;
+}
+
+.tablet-word.correct {
+  color: rgb(3, 199, 3);
+}
+
+.tablet-word.incorrect {
+  color: rgb(247, 89, 89);
+  animation: tilt-shaking 0.15s;
 }
 </style>

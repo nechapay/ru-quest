@@ -1,6 +1,6 @@
 <template>
   <div class="final-page fill">
-    <div class="final-page__header">Поздравляем!</div>
+    <div class="final-page__header">Поздравляем!<br />Вы спасены!</div>
   </div>
 </template>
 

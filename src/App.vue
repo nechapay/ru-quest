@@ -16,7 +16,7 @@ function handleStarted() {
 <template>
   <Transition name="fade" mode="out-in">
     <start-page v-if="!started && !ended" @started="handleStarted" />
-    <main-page v-else-if="started && !ended" />
+    <main-page v-else-if="started && !ended" @ended="ended = true" />
     <end-page v-else-if="ended" />
   </Transition>
   <Copyright />

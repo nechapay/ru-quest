@@ -41,8 +41,16 @@
   flex-direction: column;
 }
 
+.flex-wrap {
+  flex-wrap: wrap;
+}
+
 .justify-center {
   justify-content: center;
+}
+
+.justify-start {
+  justify-content: flex-start;
 }
 
 .fade-enter-active,

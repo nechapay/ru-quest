@@ -4,7 +4,7 @@ import TabletDialog from './TabletDialog.vue'
 import ScrollDialog from './ScrollDialog.vue'
 
 const props = defineProps(['question'])
-const emits = defineEmits(['finished'])
+const emits = defineEmits(['finished', 'completed'])
 let faded = ref(false)
 
 let tabletDialogVisible = ref(false)
@@ -18,11 +18,23 @@ function showDialog(dialog, val) {
   if (dialog === 'scroll') scrollDialogVisible.value = val
   faded.value = val
 }
+
+function handleCompleted() {
+  tabletDialogVisible.value = false
+  emits('completed')
+}
 </script>
 <template>
   <div class="table fill">
     <Transition name="bounce">
-      <div class="book" @click="showDialog('scroll', true)"></div>
+      <div class="book base-flex flex-column" @click="showDialog('scroll', true)">
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+        <div></div>
+      </div>
     </Transition>
     <Transition name="bounce">
       <div class="tablet" @click="showDialog('tablet', true)" v-show="tabletVisible"></div>
@@ -37,6 +49,7 @@ function showDialog(dialog, val) {
         @close="showDialog('tablet', false)"
         :tablet="question?.tablet"
         @finished="(e) => emits('finished')"
+        @completed="handleCompleted"
       />
     </Transition>
   </div>
@@ -46,10 +59,11 @@ function showDialog(dialog, val) {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid rgba(0, 0, 0, 0.74);
+  border: 4px solid chocolate;
   background-image: url('/img/table.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+  border-radius: 4%;
 }
 
 .book {
@@ -61,12 +75,19 @@ function showDialog(dialog, val) {
   aspect-ratio: 5/7;
 }
 
+.book div {
+  width: 80%;
+  border: 1px solid rgb(61, 56, 56);
+  margin-top: 6%;
+  margin-bottom: 10%;
+}
+
 /* .tablet {
   background-image: url('/img/tablet.png');
   background-repeat: no-repeat;
   background-size: cover;
   width: 15%;
-  height: 47%; 
+  height: 47%;
   min-height: 240px;
   min-width: 172px;
   cursor: pointer;
