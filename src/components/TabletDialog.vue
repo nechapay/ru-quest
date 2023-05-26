@@ -2,6 +2,8 @@
 import { onMounted, ref } from 'vue'
 import _ from 'lodash'
 import TabletAuth from './TabletAuth.vue'
+import VerbPage from './VerbPage.vue'
+import AuthorPage from './AuthorPage.vue'
 
 const emits = defineEmits(['close', 'finished', 'completed'])
 const props = defineProps(['tablet'])
@@ -10,8 +12,6 @@ function handleCloseClick() {
 }
 
 let page = ref('')
-let author = ref('')
-let work = ref('')
 let finished = ref(false)
 let flowIndex = ref(0)
 
@@ -23,23 +23,16 @@ onMounted(() => {
 function nextStage() {
   if (flowIndex.value + 1 < props.tablet.flow.length) {
     flowIndex.value++
+  } else {
+    finished.value = true
+    emits('finished')
   }
   page.value = props.tablet.flow[flowIndex.value]
-}
-
-function handleAuthorClick(evt, val) {
-  let element = document.getElementById('auth_' + evt.target.id.split('_')[1])
-  if (val.correct) {
-    element.classList.add('correct')
-    author.value = val.name
-    nextStage()
-  } else element.classList.add('incorrect')
 }
 
 function handleWorkClick(evt, val) {
   if (val.correct) {
     evt.target.classList.add('correct')
-    work.value = val.name
     nextStage()
   } else evt.target.classList.add('incorrect')
 }
@@ -48,15 +41,6 @@ function handleLineClick(evt, val) {
   if (val.correct) {
     evt.target.classList.add('correct')
     nextStage()
-  } else evt.target.classList.add('incorrect')
-}
-
-function handleLetterClick(evt, val) {
-  if (val === ' ') return
-  if (val.toLowerCase() === props.tablet.verb.correct.toLowerCase()) {
-    evt.target.classList.add('correct')
-    finished.value = true
-    emits('finished')
   } else evt.target.classList.add('incorrect')
 }
 
@@ -73,7 +57,12 @@ function handleTabletClick(evt) {
 }
 
 function handleNumberClick(evt) {
-  if (evt.target.value == props.tablet.numbers.correct) nextStage()
+  if (evt.target.value == props.tablet.numbers.correct) {
+    evt.target.classList.add('correct')
+    nextStage()
+  } else {
+    evt.target.classList.add('incorrect')
+  }
 }
 
 function handleWordClick(evt, val) {
@@ -95,17 +84,7 @@ function handleInfoClick() {
         <div class="tablet-inner-wrapper" v-if="page === 'password'">
           <TabletAuth :password="tablet.password" @passed="nextStage" />
         </div>
-        <div class="tablet-inner-wrapper" v-else-if="page === 'authors'">
-          <div
-            class="author-wrapper"
-            v-for="item in _.shuffle(tablet.authors)"
-            @click="handleAuthorClick($event, item)"
-            :id="`auth_${item.id}`"
-          >
-            <img :src="`./img/${item.img}`" :id="`img_${item.id}`" />
-            <span>{{ item.name }}</span>
-          </div>
-        </div>
+        <AuthorPage :authors="tablet.authors" @finished="nextStage" v-else-if="page === 'authors'" />
         <div class="tablet-inner-wrapper" v-else-if="page === 'works'">
           <div
             class="work-wrapper"
@@ -117,9 +96,9 @@ function handleInfoClick() {
           </div>
         </div>
         <div class="tablet-inner-wrapper flex-column no-wrap" v-else-if="page === 'poem'">
-          <span class="base-flex fill">{{ author }}. {{ work }}</span>
+          <span class="base-flex fill">{{ tablet.poem.title }}</span>
           <hr />
-          <div class="line-wrapper" v-for="item in tablet.poem">
+          <div class="line-wrapper" v-for="item in tablet.poem.data">
             <span class="line-index">{{ item.id }}</span>
             <span class="line-text" @click="handleLineClick($event, item)">{{ item.line }}</span>
             <br v-if="item.blank" />
@@ -140,29 +119,11 @@ function handleInfoClick() {
             </button>
           </div>
         </div>
-        <div class="tablet-inner-wrapper justify-center" v-else-if="page === 'verb'">
-          <span>{{ tablet?.verb.title }}</span>
-          <div class="verb-wrapper base-flex">
-            <span class="verb-letter blank">{{ tablet?.verb.pre }}</span>
-            <span
-              class="verb-letter"
-              :class="{ blank: item === ' ' }"
-              @click="handleLetterClick($event, item)"
-              v-for="item in tablet.verb.main.split('')"
-              >{{ item }}</span
-            >
-            <span class="verb-letter blank">{{ tablet?.verb.post }}</span>
-          </div>
-          <div class="message-container base-flex">
-            <Transition name="fade">
-              <span v-if="finished">message</span>
-            </Transition>
-          </div>
-        </div>
+        <VerbPage :verb="tablet.verb" @finished="nextStage" :finished="finished" v-else-if="page === 'verb'" />
         <div class="tablet-inner-wrapper flex-column base-flex" v-else-if="page === 'info'">
           <span>{{ tablet?.info.text }}</span>
 
-          <button class=".tablet-number" @click="handleInfoClick">Приступить</button>
+          <button class="tablet-number" @click="handleInfoClick">Приступить</button>
         </div>
         <div class="tablet-inner-wrapper flex-column base-flex" v-else-if="page === 'final'">
           <span>{{ tablet?.final.text }}</span>
@@ -178,7 +139,6 @@ function handleInfoClick() {
           </div>
         </div>
       </Transition>
-      <!-- <button class="tablet-close-button" @click="handleCloseClick" title="Закрыть"></button> -->
     </div>
   </div>
 </template>
@@ -189,7 +149,6 @@ function handleInfoClick() {
   position: fixed;
   top: 0;
   left: 0;
-  /* background: rgba(128, 128, 128, 0.425); */
 }
 
 .dialog-body {
@@ -209,69 +168,6 @@ function handleInfoClick() {
 .big-tablet:after {
   height: 6%;
   top: 104%;
-}
-
-.tablet-inner-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  overflow-y: scroll;
-  overflow-x: hidden;
-  /* border: 1px solid black; */
-  width: 100%;
-  height: 100%;
-  padding: 2%;
-}
-
-.tablet-inner-wrapper::-webkit-scrollbar {
-  width: 10px;
-}
-
-.tablet-inner-wrapper::-webkit-scrollbar-track {
-  background-color: #5c5a5a3f;
-  border-radius: 100px;
-}
-
-.tablet-inner-wrapper::-webkit-scrollbar-thumb {
-  background-color: rgb(151, 148, 148);
-  border-radius: 100px;
-}
-
-.tablet-close-button {
-  padding: 4%;
-  border-radius: 50%;
-  border: 4px solid #362727;
-  position: relative;
-  top: 3%;
-  background: white;
-  cursor: pointer;
-}
-
-.author-wrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 35%;
-  height: auto;
-  padding: 1%;
-  margin: 2%;
-  cursor: pointer;
-  border: 2px solid transparent;
-  transition-duration: 0.5s;
-}
-
-.author-wrapper.correct {
-  border: 2px solid rgb(3, 199, 3);
-}
-
-.author-wrapper.incorrect {
-  border: 2px solid rgb(247, 89, 89);
-  animation: tilt-shaking 0.15s;
-}
-
-.author-wrapper img {
-  max-width: 100%;
-  height: 95%;
 }
 
 .work-wrapper {
@@ -331,49 +227,6 @@ function handleInfoClick() {
   opacity: 1;
 }
 
-.verb-letter {
-  display: inline-block;
-  min-width: 8px;
-  font-size: 2rem;
-  cursor: pointer;
-  user-select: none;
-}
-
-.verb-letter.correct {
-  color: rgb(3, 199, 3);
-  cursor: auto;
-  font-weight: bolder;
-}
-
-.verb-letter.incorrect {
-  color: rgb(247, 89, 89);
-  cursor: auto;
-  font-weight: bolder;
-  animation: tilt-shaking 0.15s;
-}
-
-.verb-letter:hover {
-  font-weight: bolder;
-}
-
-.verb-letter.blank {
-  cursor: auto;
-}
-
-.verb-letter.blank:hover {
-  font-weight: 100;
-}
-
-.verb-wrapper {
-  width: 100%;
-  flex-wrap: wrap;
-}
-
-.message-container {
-  width: 100%;
-  height: 30%;
-}
-
 .tablet-number {
   font-size: 2rem;
   background: white;
@@ -388,6 +241,15 @@ function handleInfoClick() {
 .tablet-number:hover {
   background: green;
   color: white;
+}
+
+.tablet-number.correct {
+  color: rgb(3, 199, 3);
+}
+
+.tablet-number.incorrect {
+  color: rgb(247, 89, 89);
+  animation: tilt-shaking 0.15s;
 }
 
 .tablet-word {
