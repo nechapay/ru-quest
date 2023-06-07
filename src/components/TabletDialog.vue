@@ -4,6 +4,7 @@ import _ from 'lodash'
 import TabletAuth from './TabletAuth.vue'
 import VerbPage from './VerbPage.vue'
 import AuthorPage from './AuthorPage.vue'
+import LettersPage from './LettersPage.vue'
 
 const emits = defineEmits(['close', 'finished', 'completed'])
 const props = defineProps(['tablet'])
@@ -120,6 +121,7 @@ function handleInfoClick() {
           </div>
         </div>
         <VerbPage :verb="tablet.verb" @finished="nextStage" :finished="finished" v-else-if="page === 'verb'" />
+        <LettersPage :letters="tablet.letters" @finished="nextStage" :finished="finished" v-else-if="page === 'letters'" />
         <div class="tablet-inner-wrapper flex-column base-flex" v-else-if="page === 'info'">
           <span>{{ tablet?.info.text }}</span>
 

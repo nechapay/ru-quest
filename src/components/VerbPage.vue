@@ -26,7 +26,7 @@ function handleLetterClick(evt, val) {
     </div>
     <div class="message-container base-flex">
       <Transition name="fade">
-        <span v-if="finished">{{ verb.message }}</span>
+        <span v-if="finished" v-html="verb.message"></span>
       </Transition>
     </div>
   </div>
