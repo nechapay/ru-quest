@@ -1,7 +1,8 @@
 <script setup>
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import TabletDialog from './TabletDialog.vue'
 import ScrollDialog from './ScrollDialog.vue'
+import Intro from './Intro.vue'
 
 const props = defineProps(['question'])
 const emits = defineEmits(['finished', 'completed'])
@@ -9,6 +10,7 @@ let faded = ref(false)
 
 let tabletDialogVisible = ref(false)
 let scrollDialogVisible = ref(false)
+const introVisible = ref(false)
 
 const tabletVisible = computed(() => !tabletDialogVisible.value)
 
@@ -23,11 +25,23 @@ function handleCompleted() {
   tabletDialogVisible.value = false
   emits('completed')
 }
+
+function handleIntroClose() {
+  introVisible.value = false
+  faded.value = false
+}
+
+onMounted(() => {
+  setTimeout(() => {
+    introVisible.value = true
+    faded.value = true
+  }, 300)
+})
 </script>
 <template>
   <div class="table fill">
     <Transition name="bounce">
-      <div class="book base-flex flex-column" @click="showDialog('scroll', true)">
+      <div class="scroll base-flex flex-column" @click="showDialog('scroll', true)">
         <div></div>
         <div></div>
         <div></div>
@@ -52,21 +66,13 @@ function handleCompleted() {
         @completed="handleCompleted"
       />
     </Transition>
+    <Transition name="bounce">
+      <Intro :value="question.intro" v-if="introVisible" @close="handleIntroClose" />
+    </Transition>
   </div>
 </template>
 <style scoped>
-.table {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  border: 4px solid chocolate;
-  background-image: url('/img/table.jpg');
-  background-repeat: no-repeat;
-  background-size: cover;
-  border-radius: 4%;
-}
-
-.book {
+.scroll {
   border: 1px solid black;
   height: 30vh;
   margin-right: 25%;
@@ -75,28 +81,10 @@ function handleCompleted() {
   aspect-ratio: 5/7;
 }
 
-.book div {
+.scroll div {
   width: 80%;
   border: 1px solid rgb(61, 56, 56);
   margin-top: 6%;
   margin-bottom: 10%;
-}
-
-/* .tablet {
-  background-image: url('/img/tablet.png');
-  background-repeat: no-repeat;
-  background-size: cover;
-  width: 15%;
-  height: 47%;
-  min-height: 240px;
-  min-width: 172px;
-  cursor: pointer;
-} */
-
-.transparent-fader {
-  position: fixed;
-  top: 0;
-  left: 0;
-  background: rgba(128, 128, 128, 0.425);
 }
 </style>

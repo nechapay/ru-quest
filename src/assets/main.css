@@ -228,3 +228,34 @@
   background-color: rgb(151, 148, 148);
   border-radius: 100px;
 }
+
+.table {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 4px solid chocolate;
+  background-image: url('/img/table.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 20px;
+}
+
+.transparent-fader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: rgba(128, 128, 128, 0.425);
+}
+
+.letter {
+  width: 100px;
+  height: 100px;
+  border: 1px solid black;
+  margin: 5px;
+  background: linear-gradient(to bottom, #4096ee 0%, #4096ee 100%);
+  user-select: none;
+  font-weight: bolder;
+  color: white;
+  font-size: 3rem;
+  text-shadow: 3px 3px 5px#000000, -1px -1px 5px #000000, 1px -1px 5px #00000000, -1px 1px 5px #000, 1px 1px 5px #000;
+}

@@ -2,7 +2,8 @@
 
 <template>
   <div class="final-page fill">
-    <div class="final-page__header">Поздравляем!<br />Вы спасены!</div>
+    <div class="final-page__image"><img :src="`./img/end.gif`" alt="pushkin" /></div>
+    <div class="final-page__header">МОЛОДЦЫ, РЕБЯТА!<br />ИЗУЧАЙТЕ ИСТОРИЮ И ЛИТЕРАТУРУ СВОЕЙ СТРАНЫ!!!</div>
   </div>
 </template>
 
@@ -24,9 +25,13 @@
 }
 
 .final-page__header {
-  font-size: 600%;
+  font-size: 300%;
   margin-bottom: 10vmin;
   text-align: center;
+}
+
+.final-page__image img {
+  max-height: 50vh;
 }
 .final-page__body {
   font-size: 300%;

@@ -2,6 +2,7 @@
 import { computed, ref, watch } from 'vue'
 import Table from './Table.vue'
 import Inventory from './Inventory.vue'
+import FinalTable from './FinalTable.vue'
 
 const emits = defineEmits(['ended'])
 
@@ -9,6 +10,9 @@ const questions = [
   {
     id: 'q_1',
     lastStage: false,
+    intro: {
+      text: 'Сегодня очень странный день.<br>Какой-то неизвестный кабинет, дверь закрыта.<br>Напротив стол, на столе лежат лист бумаги и планшет.<br>Нужно как-то выбираться отсюда.'
+    },
     scroll: {
       type: 'list',
       text: 'Итак, А.С. Пушкин. На смерть этого поэта другое «юное дарование» <b>(Х)</b> пишет стихотворение и за него ссылается на Кавказ.',
@@ -16,6 +20,7 @@ const questions = [
         'Этот поэт <b>(Х)</b> на 25-летие важной исторической битвы пишет балладу <b>(Y)</b>.',
         'Этот поэт <b>(Х)</b> прожил очень мало. Он родился через 2 года после описываемого им в балладе <b>(Y)</b> сражения. Во время восстания декабристов ему было 11 лет.',
         'Даты его рождения и смерти легко запоминаются: последние две цифры зеркальны. Посчитайте, сколько же лет прожил поэт <b>(Х)</b> и отсчитайте в его балладе <b>(Y)</b> стих под таким номером.',
+        'Данные <b>(Х)</b>, <b>(Y)</b> и вычислений внесите в планшет!',
         'Пароль к планшету : <b>1847</b>'
       ]
     },
@@ -731,6 +736,9 @@ const questions = [
   {
     id: 'q_2',
     lastStage: false,
+    intro: {
+      text: 'Выхода по-прежнему нет.<br>Но есть другой стол, на столе лежат лист бумаги и планшет.<br>Похоже намечается закономерность.'
+    },
     scroll: {
       type: 'list',
       text: 'Описание этого сражения <b>(Y)</b> есть ещё у одного известного писателя <b>(L)</b>; только теперь картина битвы представлена в прозе, в романе-эпопее.',
@@ -925,6 +933,9 @@ const questions = [
   {
     id: 'q_3',
     lastStage: false,
+    intro: {
+      text: 'Очередной стол.'
+    },
     scroll: {
       type: 'list',
       text: 'На берегу пустынных волн<br>Стоял ОН, дум высоких полн…<br>Эти строки из поэмы А.С.Пушкина «Медный всадник». В Петербурге, недалеко от Исаакиевского собора, стоит тот памятник, название которого вынес Пушкин в заголовок.',
@@ -1045,6 +1056,9 @@ const questions = [
   {
     id: 'q_4',
     lastStage: false,
+    intro: {
+      text: 'Уже три буквы найдено. Продолжим.'
+    },
     scroll: {
       type: 'list',
       text: 'Четвёртую  букву вы можете найти:',
@@ -1077,6 +1091,9 @@ const questions = [
   {
     id: 'q_5',
     lastStage: true,
+    intro: {
+      text: 'Цель уже близка.'
+    },
     scroll: {
       type: 'list',
       text: 'Пятую подсказку вы найдёте путём вычислений:',
@@ -1105,79 +1122,12 @@ const questions = [
 
 const final = {
   id: 'final_1',
-  scroll: {
-    type: 'list',
-    text: 'Вы нашли 4 буквы и цифру. Из 4-х букв вы должны сложить фамилию поэта-символиста начала 20 века. Именно в сборнике его стихов (на полке кабинета), на странице, номер которой вы только что нашли, вы можете обнаружить нужный вам КЛЮЧ!!! КЛЮЧ представляет собой строчку, которую вы должны сообщить в качестве пароля ведущему. Узнайте эту строку по подсказкам (на странице).',
-    list: [
-      'НАЗВАНИЕ ОДНОГО ИЗ ПРОИЗВЕДЕНИЙ А.Н.ОСТРОВСКОГО',
-      'ОДНОКОРЕННОЕ С ОДНИМ ИЗ СЛОВ ИСТОРИЧЕСКОГО СЛОВОСОЧЕТАНИЯ «ДЕКАБРИСТСКОЕ ВОССТАНИЕ»',
-      'ИМЕННО ЭТО РАЗРАЗИЛОСЬ НАД МОСКВОЙ, ИЗОБРАЖЁННОЙ БУЛГАКОВЫМ, КОГДА ЕЁ ПОКИДАЛА СВИТА ВОЛАНДА'
-    ]
+  intro: {
+    text: 'Внимательно посмотрите видео. Вспомните разгаданную цифру. Именно на этой секунде звучит фраза, из которой вы должны забрать имя существительное, поставив его в Именительный падеж.'
   },
-  tablet: {
-    flow: ['authors', 'numbers', 'word', 'final'],
-    authors: [
-      {
-        id: 1,
-        name: 'Ахматова',
-        img: 'Akhmatova.jpg',
-        correct: false
-      },
-      {
-        id: 2,
-        name: 'Блок',
-        img: 'Blok.jpg',
-        correct: true
-      },
-      {
-        id: 3,
-        name: 'Есенин',
-        img: 'Esenin.jpg',
-        correct: false
-      },
-      {
-        id: 4,
-        name: 'Лермонтов',
-        img: 'Lermontov.jpg',
-        correct: false
-      },
-      {
-        id: 5,
-        name: 'Маяковский',
-        img: 'Mayakovsky.jpg',
-        correct: false
-      },
-      {
-        id: 6,
-        name: 'Некрасов',
-        img: 'Nekrasov.jpg',
-        correct: false
-      },
-      {
-        id: 7,
-        name: 'Пушкин',
-        img: 'Pushkin.jpg',
-        correct: false
-      },
-      {
-        id: 8,
-        name: 'Твардовский',
-        img: 'Tvardovsky.jpg',
-        correct: false
-      }
-    ],
-    numbers: {
-      text: 'Выберите номер страницы',
-      correct: 28,
-      count: 99
-    },
-    word: {
-      text: ['гроза заря удар'],
-      correct: 'гроза'
-    },
-    final: {
-      text: '«В моем словаре нет слова «невозможно»», - говорил Наполеон Бонапарт. В Вашем, похоже, тоже! Вы на верном пути!'
-    }
+  correct: 'ЧАРОДЕЙ',
+  reward: {
+    text: '«В моем словаре нет слова «невозможно»», - говорил Наполеон Бонапарт. В Вашем, похоже, тоже!<br><b>ВЫ СПАСЕНЫ!!!!</b>'
   }
 }
 
@@ -1242,10 +1192,7 @@ let allowNextStage = computed(() => {
   return false
 })
 
-let answer = computed(() => {
-  let str = inventory.value.map((i) => i.name).join('')
-  return str
-})
+let answer = computed(() => inventory.value.map((i) => i.name).join(''))
 
 watch(answer, (newValue, oldValue) => {
   if (newValue === 'БЛОК') {
@@ -1274,13 +1221,7 @@ watch(answer, (newValue, oldValue) => {
             @completed="handleCompleted"
             v-if="!finalStage"
           />
-          <Table
-            :question="final"
-            @finished="handleTableFinished"
-            :key="final.id"
-            @completed="handleCompleted"
-            v-else-if="finalStage"
-          />
+          <FinalTable :question="final" :key="final.id" @completed="handleCompleted" v-else-if="finalStage" />
         </Transition>
       </div>
     </div>
