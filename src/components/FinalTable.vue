@@ -32,7 +32,7 @@ function handleIntroClose() {
       <div class="tablet-landscape">
         <video controls>
           <source src="/video/block.mp4" type="video/mp4" />
-          <track label="Русский" kind="subtitles" srclang="ru" src="/video/block.vtt" default />
+          <track label="Русский" kind="subtitles" srclang="ru" :src="`./video/block.vtt`" default />
         </video>
       </div>
     </Transition>
