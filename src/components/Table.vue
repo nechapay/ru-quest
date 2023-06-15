@@ -32,10 +32,12 @@ function handleIntroClose() {
 }
 
 onMounted(() => {
-  setTimeout(() => {
-    introVisible.value = true
-    faded.value = true
-  }, 300)
+  if (props.question.intro.enabled) {
+    setTimeout(() => {
+      introVisible.value = true
+      faded.value = true
+    }, 300)
+  }
 })
 </script>
 <template>

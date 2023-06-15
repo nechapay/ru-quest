@@ -4,6 +4,7 @@
   <div class="final-page fill">
     <div class="final-page__image"><img :src="`./img/end.gif`" alt="pushkin" /></div>
     <div class="final-page__header">МОЛОДЦЫ, РЕБЯТА!<br />ИЗУЧАЙТЕ ИСТОРИЮ И ЛИТЕРАТУРУ СВОЕЙ СТРАНЫ!!!</div>
+    <audio src="/audio/fireworks.mp3" autoplay loop></audio>
   </div>
 </template>
 

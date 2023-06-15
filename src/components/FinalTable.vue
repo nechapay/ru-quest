@@ -31,8 +31,8 @@ function handleIntroClose() {
     <Transition name="bounce">
       <div class="tablet-landscape">
         <video controls>
-          <source src="../../public/video/block.mp4" type="video/mp4" />
-          <track label="Русский" kind="subtitles" srclang="ru" src="../../public/video/block.vtt" default />
+          <source src="/video/block.mp4" type="video/mp4" />
+          <track label="Русский" kind="subtitles" srclang="ru" src="/video/block.vtt" default />
         </video>
       </div>
     </Transition>
